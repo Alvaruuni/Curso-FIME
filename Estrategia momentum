@@ -1,0 +1,27 @@
+import yfinance as yf
+
+# Función para obtener datos de un valor
+def obtener_datos_valor(ticker):
+    try:
+        # Descargar datos del valor
+        datos = yf.Ticker(ticker)
+        
+        # Obtener información básica
+        informacion = datos.info
+        
+        # Obtener datos históricos (por ejemplo, últimos 5 días)
+        historico = datos.history(period="5d")
+        
+        print("Información básica del valor:")
+        print(f"Nombre: {informacion.get('longName', 'N/A')}")
+        print(f"Sector: {informacion.get('sector', 'N/A')}")
+        print(f"Precio actual: {informacion.get('currentPrice', 'N/A')}")
+        print("\nDatos históricos:")
+        print(historico)
+        
+    except Exception as e:
+        print(f"Error al obtener datos del valor {ticker}: {e}")
+
+# Ejemplo de uso
+ticker = "AAPL"  # Símbolo de Apple Inc.
+obtener_datos_valor(ticker)
